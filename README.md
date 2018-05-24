@@ -1,6 +1,9 @@
 # nap-architecture
 iOS architecture for networking, analytics, and persistence 
 
+# Usage
+Copy the folders and files to your project. Then, follow along with each of the topics below.
+
 # Networking
 The networking files a facade design that handles networking tasks like persistency, server API, and HTTP connections in one unified class. The Facade design pattern provides a single interface to a complex subsystem that handles all data. Instead of exposing the user to a set of classes and their APIs, you only expose one simple unified API - called the LibraryAPI. Call a function such as 'LibraryAPI.shared.getCourse()' from anywhere in your app and the LIbraryAPI class will handle the data management.
 
