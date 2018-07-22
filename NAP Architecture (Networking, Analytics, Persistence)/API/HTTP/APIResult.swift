@@ -1,13 +1,12 @@
 //
-// APIResult.swift
-//  bitbat
+//  APIResult.swift
+//  appName
 //
-//  Created by Roberto Guzman on 3/18/18.
-//  Copyright © 2016 fortyTwoSports. All rights reserved.
+//  Created by Roberto Guzman on 7/6/18.
+//  Copyright © 2018 Fortytwo Sports. All rights reserved.
 //
 
 import Foundation
-import Argo
 
 public enum APIResult<T> {
     case success(T)
@@ -15,5 +14,6 @@ public enum APIResult<T> {
     case notFound
     case serverError(Int, String?)
     case clientError(Int, String?)
-    case unexpectedResponse(JSON)
+    case persistencyError(String?)
+    case unexpectedResponse
 }
