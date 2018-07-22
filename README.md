@@ -25,3 +25,4 @@ Here are some of the benefits of creating AnalyticsEvent as protocol
     -> Since AnalyticEvent is a protocol, adding a new kind of event is trivial. I don’t have to add a new case to an enum. I don’t have to litter stringly-typed event names throughout my code. I don’t have to add another extension to a struct. The protocol makes it easy to isolate concerns to their respective layers.
     
 # Persistence
+The persistency folder contains two files: Persistency Manager and PersistRouter. The Persistency Manager contains methods that fetch and delete Core Data objects, save/delete secured values, and save/modify/delete User Defaults. The PersistRouter file contains keys used in retrieving any locally stored data. 
