@@ -7,10 +7,24 @@
 //
 
 import Foundation
+import Alamofire
 
 public enum HTTPMethod: String {
     case post = "POST"
     case get = "GET"
     case put = "PUT"
     case delete = "DELETE"
+    
+    func convertToAlamofire() -> Alamofire.HTTPMethod {
+        switch self {
+        case .post:
+            return .post
+        case .get:
+            return .get
+        case .put:
+            return .put
+        case .delete:
+            return .delete
+        }
+    }
 }

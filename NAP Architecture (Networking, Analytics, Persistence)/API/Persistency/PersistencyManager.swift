@@ -51,7 +51,7 @@ class PersistencyManager {
         UserDefaults.standard.register(defaults: defaults)
         if UserDefaults.standard.bool(forKey: PersistRouter.firstLaunch) {
             UserDefaults.standard.set(false, forKey: PersistRouter.firstLaunch)
-            setSecureValue(value: nil, key: PersistRouter.authToken)
+            deleteAllSecureValues()
             firstLaunch = true
         }
         
@@ -223,21 +223,30 @@ class PersistencyManager {
     
     func setSecureValue(value: String?, key: String?) {
         guard let pass = value else {
-            SSKeychain.deletePassword(forService: PersistRouter.keychainAppService, account: key)
+            SSKeychain.deletePassword(forService: PersistencyRouter.keychainAppService, account: key)
             return
         }
-        SSKeychain.setPassword(pass, forService: PersistRouter.keychainAppService, account: key)
+        SSKeychain.setPassword(pass, forService: PersistencyRouter.keychainAppService, account: key)
     }
     
-    func getSecureValueForKey(_ key: String!) -> String? {
+    func getSecureValue(key: String) -> String? {
         var error: NSError?
         
-        let password = SSKeychain.password(forService: PersistRouter.keychainAppService, account: key, error: &error)
+        let password = SSKeychain.password(forService: PersistencyRouter.keychainAppService, account: key, error: &error)
         if error != nil {
             return nil
         } else {
             return password
         }
+    }
+    
+    func deleteSecureValue(key: String) {
+        SSKeychain.deletePassword(forService: PersistencyRouter.keychainAppService, account: key)
+    }
+    
+    func deleteAllSecureValues() {
+        SSKeychain.deletePassword(forService: PersistencyRouter.keychainAppService, account: PersistencyRouter.accessToken)
+        SSKeychain.deletePassword(forService: PersistencyRouter.keychainAppService, account: PersistencyRouter.refreshToken)
     }
 
     

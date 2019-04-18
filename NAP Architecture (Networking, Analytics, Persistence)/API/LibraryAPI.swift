@@ -17,10 +17,11 @@ class LibraryAPI  {
     private let httpManager = HTTPManager()
     private let persistencyManager = PersistencyManager.sharedInstance
     private let utility = AppUtility.sharedInstance
-    private var isOnline: Bool = true
+    private var isOnline: Bool {
+        return AppUtility.shared.isInternetAvailable()
+    }
     
     private init() {
-        isOnline = AppUtility.sharedInstance.isInternetAvailable()
     }
     
     
@@ -259,6 +260,13 @@ class LibraryAPI  {
             completion(image, data)
         })
 
+    }
+    
+    func downloadImage(url: URL?, completion: @escaping (UIImage?, Data?, Error?) -> Void) {
+        if isOnline {
+            let manager = ImageDownloadManager()
+            manager.downloadImage(url: url, type: .kingFisher, completion: completion)
+        }
     }
     
     
